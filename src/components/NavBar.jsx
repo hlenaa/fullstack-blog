@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";  
 import harryPotterLogo from "../assets/harry-potter.svg";
-import EntryModal from "./EntryModal";
 import "../Nav.css";
 
-const NavBar = ({ setEntries }) => {
-  const [modalOpen, setModalOpen] = useState(false);
+const NavBar = () => {
+  
   const navigate = useNavigate(); 
 
   const loggedIn = localStorage.getItem("loggedIn");
@@ -13,14 +12,11 @@ const NavBar = ({ setEntries }) => {
   const handleLogout = () => {
     localStorage.removeItem("loggedIn"); 
     navigate("/login"); 
-  };
-
   return (
     <nav className="nav">
       <Link to="/" className="logo-container">
         <img src={harryPotterLogo} alt="Harry Potter Logo" className="logo" />
       </Link>
-
       
       <div className="button-container">
         {loggedIn && (
@@ -28,10 +24,6 @@ const NavBar = ({ setEntries }) => {
             Log Out
           </button>
         )}
-
-        <button className="btn" onClick={() => setModalOpen(true)}>
-          Add Entry
-        </button>
         
         {!loggedIn && (
           <div className="auth-links">
@@ -41,12 +33,12 @@ const NavBar = ({ setEntries }) => {
         )}
       </div>
 
-      {modalOpen && (
-        <EntryModal
-          setEntries={setEntries}
-          closeModal={() => setModalOpen(false)}
-        />
-      )}
+      <Link
+        to={`/post/create`}
+        className="btn bg-white text-navy-800 border-none btn-primary"
+      >
+        Create Post
+      </Link>
     </nav>
   );
 };

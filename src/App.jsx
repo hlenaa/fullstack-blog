@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
-import ProtectedRoute from "./utils/ProtectedRoute"; 
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   const [entries, setEntries] = useState([]);
@@ -18,7 +22,7 @@ function App() {
     },
     {
       path: "/home",
-      element: <ProtectedRoute element={<Home />} />, 
+      element: <ProtectedRoute element={<Home />} />,
     },
     {
       path: "/login",

@@ -51,7 +51,7 @@ const CreatePost = ({ setEntries }) => {
           <h3 className="font-bold text-3xl mb-5">Create Post</h3>
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4 w-full"
+            className="md:grid grid-cols-1 md:grid-cols-5 gap-4 mb-4 w-full"
           >
             <div className="w-full col-span-1 md:col-span-3 lg:col-span-4 flex flex-col gap-3">
               <input
@@ -71,7 +71,7 @@ const CreatePost = ({ setEntries }) => {
                 className="textarea textarea-bordered w-full"
               ></textarea>
             </div>
-            <div className="w-full col-span-1 md:col-span-2 lg:col-span-1 flex flex-col gap-3">
+            <div className="w-full col-span-1 md:col-span-2 lg:col-span-1 flex flex-col gap-3 mt-3 md:mt-0">
               <input
                 type="date"
                 name="date"

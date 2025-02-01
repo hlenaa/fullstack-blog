@@ -1,13 +1,37 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";  
 import harryPotterLogo from "../assets/harry-potter.svg";
+import "../Nav.css";
 
 const NavBar = () => {
+  
+  const navigate = useNavigate(); 
+
+  const loggedIn = localStorage.getItem("loggedIn");
+
+  const handleLogout = () => {
+    localStorage.removeItem("loggedIn"); 
+    navigate("/login"); 
   return (
-    <nav className="flex items-center justify-between bg-white p-4 shadow-md">
-      <Link to="/" className="flex items-center space-x-2">
-        <img src={harryPotterLogo} alt="Harry Potter Logo" className="h-16" />
+    <nav className="nav">
+      <Link to="/" className="logo-container">
+        <img src={harryPotterLogo} alt="Harry Potter Logo" className="logo" />
       </Link>
+      
+      <div className="button-container">
+        {loggedIn && (
+          <button className="btn" onClick={handleLogout}>
+            Log Out
+          </button>
+        )}
+        
+        {!loggedIn && (
+          <div className="auth-links">
+            <Link to="/login" className="btn">Log In</Link>
+            <Link to="/signup" className="btn">Sign Up</Link>
+          </div>
+        )}
+      </div>
 
       <Link
         to={`/post/create`}

@@ -4,8 +4,9 @@ import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
 import NavBar from "./components/NavBar";
-
-//import Post from "./pages/Post";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import ProtectedRoute from "./utils/ProtectedRoute"; 
 
 function App() {
   const [entries, setEntries] = useState([]);
@@ -13,7 +14,19 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />,
+      element: <Navigate to="/login" />,
+    },
+    {
+      path: "/home",
+      element: <ProtectedRoute element={<Home />} />, 
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/signup",
+      element: <SignUp />,
     },
     {
       path: "/post/:id",

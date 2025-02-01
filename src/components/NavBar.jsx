@@ -21,7 +21,7 @@ const NavBar = ({ setEntries }) => {
         <img src={harryPotterLogo} alt="Harry Potter Logo" className="logo" />
       </Link>
 
-      {/* Button container for Add Entry and Log Out */}
+      
       <div className="button-container">
         {loggedIn && (
           <button className="btn" onClick={handleLogout}>
@@ -33,7 +33,6 @@ const NavBar = ({ setEntries }) => {
           Add Entry
         </button>
         
-        {/* Authentication links */}
         {!loggedIn && (
           <div className="auth-links">
             <Link to="/login" className="btn">Log In</Link>
@@ -42,7 +41,6 @@ const NavBar = ({ setEntries }) => {
         )}
       </div>
 
-      {/* Modal for adding entry */}
       {modalOpen && (
         <EntryModal
           setEntries={setEntries}

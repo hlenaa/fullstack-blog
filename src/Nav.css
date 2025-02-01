@@ -1,0 +1,111 @@
+/* General Navbar Styling */
+nav {
+  background-color: #cc1010;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+nav .logo-container {
+  display: flex;
+  align-items: center;
+}
+
+nav .logo {
+  height: 50px; /* Adjust logo size */
+}
+
+nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between buttons */
+}
+
+/* Button Styling */
+nav .btn {
+  background-color: #3d446d;
+  color: white;
+  border: none;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+nav .btn:hover {
+  background-color: #45a049;
+}
+
+nav .btn:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+nav .btn-logout {
+  background-color: #e74c3c;
+}
+
+nav .btn-logout:hover {
+  background-color: #c0392b;
+}
+
+/* Auth links for log in and sign up */
+nav .auth-links {
+  display: flex;
+  gap: 10px;
+}
+
+/* Modal Button Styling */
+nav .btn-modal {
+  background-color: #3498db;
+}
+
+nav .btn-modal:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  nav .logo {
+    height: 40px; /* Smaller logo size */
+  }
+
+  /* Stack buttons vertically on small screens */
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1rem;
+  }
+
+  nav .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  nav .auth-links {
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  nav .auth-links .btn {
+    margin-left: 0;
+  }
+}

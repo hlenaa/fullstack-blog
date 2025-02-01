@@ -1,0 +1,83 @@
+
+body {
+    font-family: 'Garamond', serif;
+    background-image: url('https://www.example.com/harry-potter-background.jpg'); 
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    color: white;
+  }
+  
+  
+  
+ 
+ 
+  
+
+  .home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .home-box {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+    width: 300px;
+  }
+  
+  .home-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+}
+  
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-box {
+    background-color: rgba(0, 0, 0, 0.7); /* Keep the dark background for overlay effect */
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    background-image: url('https://www.example.com/path/to-your-image.jpg'); /* Add your image URL here */
+    background-size: cover; /* Makes sure the image covers the whole container */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents repeating the image */
+    color: white; /* Ensures the text is visible on top of the background */
+}
+  
+  .textbox {
+    margin: 15px 0;
+  }
+  
+  .textbox input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.8); /* Add a light background to input fields */
+    border: none; /* Optional: Remove border */
+}
+  
+  .welcome-message {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+  }
+  

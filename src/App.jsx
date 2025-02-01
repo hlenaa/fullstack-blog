@@ -1,4 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./pages/Home";
+//import Post from "./pages/Post";
 
 function App() {
   const router = createBrowserRouter([
@@ -6,10 +8,10 @@ function App() {
       path: "/",
       element: <Home />,
     },
-    {
-      path: "/post/:id",
-      element: <Post />,
-    },
+    // {
+    //   path: "/post/:id",
+    //   element: <Post />,
+    // },
   ]);
 
   return (

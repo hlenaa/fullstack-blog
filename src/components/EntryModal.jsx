@@ -5,6 +5,7 @@ const EntryForm = ({ setEntries, closeModal }) => {
   const [newEntry, setNewEntry] = useState({
     date: "",
     title: "",
+    category: "",
     image: "",
     content: "",
   });
@@ -24,6 +25,7 @@ const EntryForm = ({ setEntries, closeModal }) => {
     if (
       !newEntry.date ||
       !newEntry.title ||
+      !newEntry.category ||
       !newEntry.image ||
       !newEntry.content
     )
@@ -60,7 +62,7 @@ const EntryForm = ({ setEntries, closeModal }) => {
                 type="date"
                 name="date"
                 value={newEntry.date}
-                onChange={handleDateChange}
+                onChange={handleChange}
                 max={new Date().toISOString().split("T")[0]}
                 className="input input-bordered w-full max-w-xs"
               />
@@ -73,6 +75,17 @@ const EntryForm = ({ setEntries, closeModal }) => {
                 placeholder="Title"
                 className="input input-bordered w-full max-w-xs mt-2"
               />
+              <select
+                name="category"
+                value={newEntry.category}
+                onChange={handleChange}
+                className="select select-bordered w-full max-w-xs mt-2"
+              >
+                <option value="">Select...</option>
+                <option value="news">News</option>
+                <option value="characters">Characters</option>
+                <option value="lifestyle">Lifestyle</option>
+              </select>
               <input
                 type="url"
                 name="image"
@@ -96,7 +109,7 @@ const EntryForm = ({ setEntries, closeModal }) => {
           </>
         ) : (
           <h3 className="font-bold text-lg">
-            Your diary entry has been added successfully!
+            Your diary post has been added successfully!
           </h3>
         )}
       </div>

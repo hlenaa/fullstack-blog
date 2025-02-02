@@ -1,106 +1,194 @@
 
-nav {
-  background-color: #cc1010;
-  padding: 0.75rem 1.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+html.dark {
+  background-color: #11151a; 
+  color: white; 
+}
+
+body.dark {
+  background-color: #11151a; 
+  color: white; 
+}
+
+nav.dark {
+  background-color: #11151a; 
+}
+
+body.dark .btn {
+  background-color: #8e44ad;
+  color: white;
+}
+
+body.dark .search-input {
+  background-color: #11151a; 
+  color: white;
+  border-color: #7f8c8d;
+}
+
+body.dark .search-field {
+  background-color: #11151a;
+  color: white;
+}
+
+body.dark .auth-links .btn {
+  background-color: #8e44ad;
+  color: white;
+}
+
+body.dark .auth-links .btn:hover {
+  background-color: #3498db;
+}
+
+
+
+.nav {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  font-family: Arial, sans-serif;
+  padding: 1rem 2rem;
+  background: var(--nav-bg);
+  transition: background-color 0.3s ease;
 }
 
-nav .logo-container {
+.nav-controls {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
-nav .logo {
-  height: 50px; 
-}
-
-nav a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.button-container {
+.search-container {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 2rem;
   display: flex;
-  align-items: center;
-  gap: 15px; 
+  gap: 0.5rem;
 }
 
+.search-input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
 
-nav .btn {
-  background-color: #3d446d;
+.search-input:focus {
+  outline: none;
+  border-color: #666;
+}
+
+.search-button {
+  padding: 0.5rem 1rem;
+  background: #007bff;
   color: white;
   border: none;
-  padding: 0.35rem 0.75rem;
-  font-size: 0.9rem;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-nav .btn:hover {
-  background-color: #45a049;
+.search-button:hover {
+  background: #0056b3;
 }
 
-nav .btn:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+.theme-toggle {
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
 }
 
-nav .btn-logout {
-  background-color: #e74c3c;
+.theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.1);
 }
 
-nav .btn-logout:hover {
-  background-color: #c0392b;
+:root {
+  --nav-bg: #ffffff;
 }
 
-nav .auth-links {
-  display: flex;
-  gap: 10px;
+.dark {
+  --nav-bg: #1a1a1a;
 }
 
-nav .btn-modal {
-  background-color: #3498db;
+.dark .nav {
+  background: var(--nav-bg);
+  color: white;
 }
 
-nav .btn-modal:hover {
-  background-color: #2980b9;
+.dark .search-input {
+  background: #333;
+  color: white;
+  border-color: #444;
 }
 
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-  }
+.dark .search-input::placeholder {
+  color: #888;
+}
 
-  nav .logo {
-    height: 40px; 
-  }
+.dark .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
 
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin-top: 1rem;
-  }
 
-  nav .btn {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.8rem;
-  }
 
-  nav .auth-links {
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 10px;
-  }
 
-  nav .auth-links .btn {
-    margin-left: 0;
-  }
+:root {
+  --background: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --accent: #007bff;
+  --border: #ddd;
+  --card-bg: #ffffff;
+  --nav-bg: #ffffff;
+  --button-bg: #007bff;
+  --button-text: #ffffff;
+  --input-bg: #ffffff;
+  --input-text: #333333;
+  --input-border: #ddd;
+  --hover-bg: rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  --background: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --accent: #3291ff;
+  --border: #404040;
+  --card-bg: #2d2d2d;
+  --nav-bg: #1a1a1a;
+  --button-bg: #3291ff;
+  --button-text: #ffffff;
+  --input-bg: #333333;
+  --input-text: #ffffff;
+  --input-border: #404040;
+  --hover-bg: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+input, textarea, select {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border-color: var(--input-border);
+}
+
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+a {
+  color: var(--accent);
+}
+
+
+.nav img{
+  width: 100px;
+  height: 100px;
 }

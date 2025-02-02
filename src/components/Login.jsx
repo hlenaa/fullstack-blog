@@ -13,7 +13,7 @@ const Login = () => {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    if (username === 'harrypotter' && password === 'magic123') {
+    if (username === '' && password === '') {
       localStorage.setItem("loggedIn", "true");
       alert('Login successful! Welcome to the Wizarding World!');
       navigate('/home');  

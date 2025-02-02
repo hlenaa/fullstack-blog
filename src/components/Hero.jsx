@@ -1,8 +1,9 @@
 import React from "react";
-import HeroImage from "../assets/Hero.png";
+import HeroImage from "../assets/Banner.jpg";
 
 const Hero = () => {
   return (
+    
     <div className="hero-container">
       <div className="hero">
         <img src={HeroImage} alt="Hero" className="hero-image" />

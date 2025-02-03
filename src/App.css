@@ -4,19 +4,18 @@
   padding: 2rem;
   text-align: center;
   background-color: rgb(255, 255, 255);
-
 }
-body{
+
+body {
   height: 100vh;
   background-color: rgb(127, 221, 250);
-  color: rgb(141, 13, 98);
-
-
+  color: rgb(51, 49, 50);
 }
 
-.input{
+.input {
   color: rgb(10, 10, 10);
 }
+
 .card {
   padding: 2em;
 }
@@ -24,7 +23,6 @@ body{
 .read-the-docs {
   color: #888;
 }
-
 
 .hero-container {
   width: 100%;
@@ -42,6 +40,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 80px;
 }
 
 .hero-image {
@@ -101,5 +100,34 @@ body{
     font-size: 1.2rem;
   }
 }
+body.dark {
+  background-color: #000;
+  color: white;
+}
 
+body.dark .nav {
+  background-color: #333;
+}
 
+body.dark .search-input {
+  background-color: #333;
+  color: white;
+  border-color: #444;
+}
+
+body.dark .btn {
+  background-color: #130b8a;
+  color: white;
+}
+
+body.dark .btn:hover {
+  background-color: #8e44ad;
+}
+
+body.dark .theme-toggle {
+  color: white;
+}
+
+body.dark .theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

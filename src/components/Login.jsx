@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';  
-import loginImg from '../assets/login.webp'; 
+import loginImg from '../assets/login.webp';
+import "../LogIn.css"
 
 
 const Login = () => {
@@ -33,10 +34,24 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    document.getElementById("root").style.backgroundColor = "#000000"; 
+    document.body.style.backgroundColor = "#000000"; 
+    document.documentElement.style.backgroundColor = "#000000"; 
+  
+    return () => {
+      document.getElementById("root").style.backgroundColor = ""; 
+      document.body.style.backgroundColor = ""; 
+      document.documentElement.style.backgroundColor = ""; 
+    };
+  }, []);
+  
+
   return (
     <>
     
-    <div className="min-h-screen flex items-center justify-center ">
+    <div className="min-h-screen flex items-center justify-center "
+    >
       <div 
         className="container bg-cover bg-center bg-no-repeat"
         style={{ 

@@ -35,7 +35,7 @@ const PostDetails = () => {
 
   return (
     <div>
-      <NavBar setEntries={setEntries} />
+     
       {entry ? (
         <Post entry={entry} handleUpdateEntries={handleUpdateEntries} />
       ) : (

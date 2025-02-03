@@ -14,10 +14,8 @@ const Card = ({ entry }) => {
         overflow: 'hidden',
       }}
     >
-    
       <div className="relative">
         <div className="card-image-wrapper">
-         
           <img
             src={entry.image}
             alt={entry.title}

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import NavBar from "../components/NavBar";
 import Post from "../components/Post";
+import "../styles/PostD.css";
+
+
 
 const PostDetails = () => {
   console.log("Entry.jsx");
@@ -34,7 +36,7 @@ const PostDetails = () => {
   }, [id, entries]);
 
   return (
-    <div>
+    <div className="post-details-container">
      
       {entry ? (
         <Post entry={entry} handleUpdateEntries={handleUpdateEntries} />

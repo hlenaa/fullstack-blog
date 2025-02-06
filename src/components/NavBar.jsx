@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../Context/ThemeContext";
-import "../Nav.css";
+import "../Styles/Nav.css";
 import moon from "../assets/moon.png";
 import sun from "../assets/sun.png";
-import Logo from "../assets/snich.png";
 
 
 const NavBar = () => {
@@ -32,10 +31,11 @@ const NavBar = () => {
         <Link to={`/post/create`} className="home">
           Create Post
         </Link>
+      <Link to="/sorting-hat">Sorting Hat Quiz</Link>
       </div>
 
       <div className="nav-center">
-      <div className="logo"> <img src={Logo} className="logo-icon" />
+      <div className="logo"> <img src="/snich.png" alt="Golden Snitch" className="logo-icon" />
       </div>
       </div>
 

@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider, Navigate, Outlet, } from "react-ro
 import { ThemeProvider, useTheme } from "./Context/ThemeContext"; 
 import { useState, useEffect } from "react";
 import React from "react";
+import SortingHatPage from "./pages/SortingHatPage"; 
 
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
@@ -10,8 +11,8 @@ import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import "./App.css"
-import "./Nav.css"
+import "./Styles/App.css"
+import "./Styles/Nav.css";
 
 const Layout = () => {
   const { darkMode } = useTheme(); 
@@ -57,6 +58,10 @@ function App() {
         {
           path: "/post/create",
           element: <CreatePost setEntries={setEntries} />,
+        },
+        {
+          path: "/sorting-hat", 
+          element: <ProtectedRoute element={<SortingHatPage />} />,
         },
       ],
     },

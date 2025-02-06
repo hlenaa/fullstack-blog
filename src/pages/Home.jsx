@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Card from "../components/Card";
 import Hero from "../components/Hero";
-import "../App.css";
-
+import "../Styles/App.css";
+import "../Styles/Nav.css";
 const Home = () => {
   const [entries, setEntries] = useState(
     JSON.parse(localStorage.getItem("entries")) || []
@@ -28,14 +28,10 @@ const Home = () => {
             `}
           >
             <div 
-              className="folder-header cursor-pointer" 
+              className={`folder-header cursor-pointer ${category}-bg`}  
               onClick={() => toggleCategory(category)}
             >
-              <img 
-                src={`/${category}-cover.jpg`} 
-                alt={`${category} cover`} 
-                className="folder-image" 
-              />
+            
               <div className="folder-text">
                 <h2>{category.charAt(0).toUpperCase() + category.slice(1)} Posts</h2>
                 <p>Explore {category} related posts.</p>
@@ -65,6 +61,8 @@ const Home = () => {
           <h2>Select a category to view posts.</h2>
         </div>
       )}
+
+      
     </div>
   );
 };

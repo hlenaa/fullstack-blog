@@ -1,13 +1,17 @@
+import "../styles/PostD.css";
+
+
+
 const Post = ({ entry, handleUpdateEntries }) => {
   return (
-    <div>
-      <p>{entry.date}</p>
-      <h2>{entry.title}</h2>
+    <div className="post-container">
+      <p className="post-date">{entry.date}</p>
+      <h2 className="post-title">{entry.title}</h2>
       <figure>
-        <img src={entry.image} alt={entry.title} />
+        <img className="post-image" src={entry.image} alt={entry.title} />
       </figure>
       <div>
-        <p>{entry.content}</p>
+        <p className="post-content">{entry.content}</p>
       </div>
     </div>
   );

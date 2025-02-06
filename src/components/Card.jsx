@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../CreateP.css";
+import "../Styles/CreateP.css";
 
 const Card = ({ entry }) => {
   const getHouseClass = () => {

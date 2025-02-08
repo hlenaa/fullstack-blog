@@ -117,7 +117,7 @@ const CreatePost = ({ setEntries }) => {
                 <option value="">Select Category...</option>
                 <option value="news">News</option>
                 <option value="characters">Characters</option>
-                <option value="lifestyle">Lifestyle</option>
+                <option value="lifestyle">Lifestyles</option>
               </select>
 
               <input

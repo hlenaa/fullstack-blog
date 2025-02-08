@@ -1,0 +1,203 @@
+.create-post-container {
+    max-width: 1200px;
+    margin: 16rem auto;
+    padding: 2rem;
+    background: rgba(248, 249, 250, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    opacity: 0.95; 
+
+  }
+  
+
+.ravenclaw-card {
+    background-image: url('/rav.png');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .gryffindor-card {
+    background-image: url('/gry.png');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .hufflepuff-card {
+    background-image: url('/huf.png');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .slytherin-card {
+    background-image: url('/sly.png');
+    background-size: cover;
+    background-position: center;
+  }
+  
+
+  .house-card:hover {
+    opacity: 0.9; 
+  }
+  
+  .ravenclaw-card .card-title {
+    color: #fff;
+  }
+  
+  .gryffindor-card .card-title {
+    color: #fff;
+  }
+  
+  .hufflepuff-card .card-title {
+    color: #fff;
+  }
+  
+  .slytherin-card .card-title {
+    color: #fff;
+  }
+  
+  .card-body {
+    background-color: rgba(255, 255, 255, 0.7); 
+    padding: 1.5rem;
+    border-radius: 8px;
+    position: relative;
+    opacity: 1; 
+  }
+
+  .create-post-container h3 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 1px;
+  }
+  
+  .create-post-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+  
+  .col-span-2 {
+    grid-column: span 2;
+    
+  }
+  
+  .col-span-1 {
+    grid-column: span 1;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    background: rgba(255, 255, 255, 0.9); 
+    opacity: 0.85; 
+  }
+  
+  
+  .input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  }
+  
+  .textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 150px;
+    transition: border-color 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    color: #2c3e50;
+  }
+  
+  .textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  }
+  
+  .select {
+    width: 100%;
+   
+    margin-bottom: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    color: #2c3e50;
+  }
+  
+  .select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  }
+  
+  
+  
+  .create-post-submit {
+    grid-column: span 3;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .create-post-container h3:only-child {
+    color: #2ecc71;
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(248, 255, 249, 0.9);
+    border-radius: 8px;
+    border: 2px solid #2ecc71;
+  }
+  
+  @media (max-width: 768px) {
+    .create-post-form {
+      grid-template-columns: 1fr;
+    }
+  
+    .col-span-2,
+    .col-span-1 {
+      grid-column: span 1;
+    }
+  
+    .create-post-container {
+      margin: 1rem;
+      padding: 1rem;
+    }
+  }

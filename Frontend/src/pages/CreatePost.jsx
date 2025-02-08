@@ -1,5 +1,5 @@
+import axios from "axios";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 import "../Styles/CreateP.css";
 
@@ -23,8 +23,13 @@ const CreatePost = ({ setEntries }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!newEntry.date) {
+      newEntry.date = new Date().toISOString(); 
+    }
+
     if (
       !newEntry.date ||
       !newEntry.title ||
@@ -32,30 +37,36 @@ const CreatePost = ({ setEntries }) => {
       !newEntry.house ||
       !newEntry.image ||
       !newEntry.content
-    )
-      return;
+    ) {
+      console.error("All fields must be filled out.");
+      return; 
+    }
 
-    const newEntries = [
-      { id: uuidv4(), ...newEntry },
-      ...(JSON.parse(localStorage.getItem("entries")) || []),
-    ];
+    try {
+      const response = await axios.post(
+        "http://localhost:5050/posts",   //You can change it here to your Port Number
+        newEntry
+      );
 
-    setEntries(newEntries);
-    localStorage.setItem("entries", JSON.stringify(newEntries));
+      setEntries((prevEntries) => [response.data, ...prevEntries]);
 
-    setNewEntry({
-      date: "",
-      title: "",
-      category: "",
-      house: "",
-      image: "",
-      content: "",
-    });
-    setFormSubmitted(true);
+      setNewEntry({
+        date: "",
+        title: "",
+        category: "",
+        house: "",
+        image: "",
+        content: "",
+      });
+
+      setFormSubmitted(true);
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
   };
 
   return (
-    <div className={`create-post-container`}>
+    <div className="create-post-container">
       {!formSubmitted ? (
         <>
           <h3>Create Post</h3>
@@ -84,7 +95,7 @@ const CreatePost = ({ setEntries }) => {
                 name="date"
                 value={newEntry.date}
                 onChange={handleChange}
-                max={new Date().toISOString().split("T")[0]}
+                max={new Date().toISOString().split("T")[0]} 
                 className="input"
               />
               <select

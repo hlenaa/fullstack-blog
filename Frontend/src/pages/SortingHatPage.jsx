@@ -2,7 +2,11 @@ import React from "react";
 import "../Styles/App.css";
 import "../Styles/Hat.css";
 
-import SortingHatQuiz from "../components/SortingHatQuiz"; // Ensure the path is correct
+
+
+
+import SortingHatQuiz from "../components/SortingHatQuiz"; 
+
 
 const SortingHatPage = () => {
   return (

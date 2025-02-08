@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
-import axios from "axios"; 
+import axios from "axios";  
+
 import "../Styles/CreateP.css";
 
 const CreatePost = ({ setEntries }) => {
@@ -24,8 +25,13 @@ const CreatePost = ({ setEntries }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!newEntry.date) {
+      newEntry.date = new Date().toISOString(); 
+    }
+
     if (
       !newEntry.date ||
       !newEntry.title ||
@@ -33,33 +39,32 @@ const CreatePost = ({ setEntries }) => {
       !newEntry.house ||
       !newEntry.image ||
       !newEntry.content
-    )
-      return;
+    ) {
+      console.error("All fields must be filled out.");
+      return; 
+    }
 
-    const entryData = {
-      id: uuidv4(),
-      ...newEntry,
-    };
+    try {
+      const response = await axios.post(
+        "http://localhost:5050/posts",   //You can change it here to your Port Number
+        newEntry
+      );
 
-    axios
-      .post("http://localhost:5050/posts", entryData)
-      .then((response) => {
-        setEntries((prevEntries) => [response.data, ...prevEntries]);
-        const updatedEntries = [response.data, ...(JSON.parse(localStorage.getItem("entries")) || [])];
-        localStorage.setItem("entries", JSON.stringify(updatedEntries));
-        setNewEntry({
-          date: "",
-          title: "",
-          category: "",
-          house: "",
-          image: "",
-          content: "",
-        });
-        setFormSubmitted(true);
-      })
-      .catch((error) => {
-        console.error("Error creating post:", error);
+      setEntries((prevEntries) => [response.data, ...prevEntries]);
+
+      setNewEntry({
+        date: "",
+        title: "",
+        category: "",
+        house: "",
+        image: "",
+        content: "",
       });
+
+      setFormSubmitted(true);
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
   };
 
   return (
@@ -92,7 +97,7 @@ const CreatePost = ({ setEntries }) => {
                 name="date"
                 value={newEntry.date}
                 onChange={handleChange}
-                max={new Date().toISOString().split("T")[0]}
+                max={new Date().toISOString().split("T")[0]} 
                 className="input"
               />
               <select
@@ -117,7 +122,7 @@ const CreatePost = ({ setEntries }) => {
                 <option value="">Select Category...</option>
                 <option value="news">News</option>
                 <option value="characters">Characters</option>
-                <option value="lifestyle">Lifestyles</option>
+                <option value="lifestyle">Lifestyle</option>
               </select>
 
               <input

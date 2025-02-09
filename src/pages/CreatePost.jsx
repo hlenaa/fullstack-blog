@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { Link, useParams } from "react-router-dom";
-import "../Styles/CreateP.css";
 import axios from "axios";
+
+import "../Styles/CreateP.css";
 
 const CreatePost = ({ entries, setEntries }) => {
   const { id } = useParams();
@@ -49,6 +49,11 @@ const CreatePost = ({ entries, setEntries }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!postData.date) {
+      postData.date = new Date().toISOString();
+    }
+
     if (
       !postData.date ||
       !postData.title ||
@@ -57,6 +62,7 @@ const CreatePost = ({ entries, setEntries }) => {
       !postData.image ||
       !postData.content
     ) {
+      console.error("All fields must be filled out.");
       return;
     }
 

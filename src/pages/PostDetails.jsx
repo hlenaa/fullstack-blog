@@ -2,44 +2,38 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Post from "../components/Post";
 import "../styles/PostD.css";
-
-
+import axios from "axios";
 
 const PostDetails = () => {
-  console.log("Entry.jsx");
-
-  const { id } = useParams(); // Extract the entry ID from the URL
+  const { id } = useParams();
   console.log("ID outside useEffect:", id);
-  const [entry, setEntry] = useState(null);
-  const [entries, setEntries] = useState(
-    JSON.parse(localStorage.getItem("entries")) || []
-  );
-
-  // Function to get the entry by ID from localStorage
-  const getPost = (id) => {
-    const entries = JSON.parse(localStorage.getItem("entries")) || [];
-    console.log("Entries in localStorage:", entries);
-    return entries.find((entry) => entry.id === id);
-  };
-
-  const handleUpdateEntries = (updatedEntries) => {
-    setEntries(updatedEntries); // Update the entries state
-  };
-
-  console.log(localStorage.getItem("entries"));
+  const [postData, setPostData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("ID from useParams:", id);
-    const fetchedEntry = getPost(id);
-    console.log("Fetched Entry:", fetchedEntry);
-    setEntry(fetchedEntry);
-  }, [id, entries]);
+    const fetchPost = async () => {
+      if (!id) return;
+
+      try {
+        const response = await axios.get(`http://localhost:5050/posts/${id}`);
+        if (response.data) {
+          setPostData(response.data);
+        }
+      } catch (error) {
+        console.error(
+          "Error fetching post:",
+          error.response ? error.response.data : error.message
+        );
+      }
+    };
+
+    fetchPost();
+  }, [id]);
 
   return (
     <div className="post-details-container">
-     
-      {entry ? (
-        <Post entry={entry} handleUpdateEntries={handleUpdateEntries} />
+      {postData ? (
+        <Post postData={postData} />
       ) : (
         <p className="text-center">Loading...</p>
       )}

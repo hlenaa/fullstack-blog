@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../Styles/CreateP.css";
+import axios from "axios";
 
-const CreatePost = ({ setEntries }) => {
-  const [newEntry, setNewEntry] = useState({
+const CreatePost = ({ entries, setEntries }) => {
+  const { id } = useParams();
+
+  const [postData, setPostData] = useState({
     date: "",
     title: "",
     category: "",
@@ -14,43 +17,85 @@ const CreatePost = ({ setEntries }) => {
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [postId, setPostId] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(!!id);
+  const [postDeleted, setPostDeleted] = useState(false);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      if (!id) return;
+
+      try {
+        const response = await axios.get(`http://localhost:5050/posts/${id}`);
+        setPostData(response.data);
+      } catch (error) {
+        console.error(
+          "Error fetching post:",
+          error.response ? error.response.data : error.message
+        );
+      }
+    };
+
+    fetchPost();
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewEntry((prevEntry) => ({
-      ...prevEntry,
+    setPostData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
-      !newEntry.date ||
-      !newEntry.title ||
-      !newEntry.category ||
-      !newEntry.house ||
-      !newEntry.image ||
-      !newEntry.content
-    )
+      !postData.date ||
+      !postData.title ||
+      !postData.category ||
+      !postData.house ||
+      !postData.image ||
+      !postData.content
+    ) {
       return;
+    }
 
-    const newEntries = [
-      { id: uuidv4(), ...newEntry },
-      ...(JSON.parse(localStorage.getItem("entries")) || []),
-    ];
+    try {
+      let response;
 
-    setEntries(newEntries);
-    localStorage.setItem("entries", JSON.stringify(newEntries));
+      if (id) {
+        response = await axios.put(
+          `http://localhost:5050/posts/${id}`,
+          postData
+        );
+        setEntries((prevEntries) =>
+          prevEntries.map((entry) => (entry.id === id ? response.data : entry))
+        );
+        setIsUpdating(true);
+      } else {
+        response = await axios.post("http://localhost:5050/posts", postData);
+        setEntries([response.data, ...entries]);
+        setPostId(response.data.id);
+      }
 
-    setNewEntry({
-      date: "",
-      title: "",
-      category: "",
-      house: "",
-      image: "",
-      content: "",
-    });
+      setPostId(response.data.id);
+      setFormSubmitted(true);
+    } catch (error) {
+      console.error(
+        "Error saving post:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
+  const handleDelete = () => {
+    if (!id) return;
+
+    const updatedEntries = entries.filter((entry) => entry.id !== id);
+    setEntries(updatedEntries);
+    localStorage.setItem("entries", JSON.stringify(updatedEntries));
+
+    setPostDeleted(true);
     setFormSubmitted(true);
   };
 
@@ -58,20 +103,20 @@ const CreatePost = ({ setEntries }) => {
     <div className={`create-post-container`}>
       {!formSubmitted ? (
         <>
-          <h3>Create Post</h3>
+          <h3>{isUpdating ? "Update Post" : "Create Post"}</h3>
           <form onSubmit={handleSubmit} className="create-post-form">
             <div className="col-span-2">
               <input
                 type="text"
                 name="title"
-                value={newEntry.title}
+                value={postData.title}
                 onChange={handleChange}
                 placeholder="Title"
                 className="input"
               />
               <textarea
                 name="content"
-                value={newEntry.content}
+                value={postData.content}
                 onChange={handleChange}
                 rows="6"
                 placeholder="Type your message here..."
@@ -82,14 +127,14 @@ const CreatePost = ({ setEntries }) => {
               <input
                 type="date"
                 name="date"
-                value={newEntry.date}
+                value={postData.date}
                 onChange={handleChange}
                 max={new Date().toISOString().split("T")[0]}
                 className="input"
               />
               <select
                 name="house"
-                value={newEntry.house}
+                value={postData.house}
                 onChange={handleChange}
                 className="select"
               >
@@ -102,7 +147,7 @@ const CreatePost = ({ setEntries }) => {
 
               <select
                 name="category"
-                value={newEntry.category}
+                value={postData.category}
                 onChange={handleChange}
                 className="select"
               >
@@ -115,24 +160,56 @@ const CreatePost = ({ setEntries }) => {
               <input
                 type="url"
                 name="image"
-                value={newEntry.image}
+                value={postData.image}
                 onChange={handleChange}
                 placeholder="Image URL"
                 className="input"
               />
             </div>
             <div className="create-post-submit">
-              <Link to="/" className="btn bg-gray-300 text-black">
-                Discard Draft
+              <Link to="/home" className="btn bg-gray-300 text-black">
+                {isUpdating ? "Discard edits" : "Discard draft"}
               </Link>
               <button type="submit" className="btn bg-blue-500 text-white">
-                Add
+                {isUpdating ? "Update" : "Add"}
               </button>
+              {isUpdating && (
+                <button
+                  type="button"
+                  className="btn bg-red-500 text-white"
+                  onClick={handleDelete}
+                >
+                  Delete Post
+                </button>
+              )}
             </div>
           </form>
         </>
       ) : (
-        <h3>Your post has been added successfully!</h3>
+        <div>
+          <h3>
+            {postDeleted
+              ? "Your post has been successfully deleted!"
+              : isUpdating
+              ? "Your post has been updated successfully!"
+              : "Your post has been added successfully!"}
+          </h3>
+          {postDeleted ? (
+            <Link
+              to="/home"
+              className="mt-4 px-4 py-2 bg-gray-500 text-white rounded-md inline-block"
+            >
+              Return to Home
+            </Link>
+          ) : (
+            <Link
+              to={`/post/${postId}`}
+              className="px-4 py-2 bg-green-500 text-white rounded-md"
+            >
+              View Post
+            </Link>
+          )}
+        </div>
       )}
     </div>
   );

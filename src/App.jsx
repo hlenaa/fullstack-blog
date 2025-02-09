@@ -1,8 +1,13 @@
-import { createBrowserRouter, RouterProvider, Navigate, Outlet, } from "react-router-dom";
-import { ThemeProvider, useTheme } from "./Context/ThemeContext"; 
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+import { ThemeProvider, useTheme } from "./Context/ThemeContext";
 import { useState, useEffect } from "react";
 import React from "react";
-import SortingHatPage from "./pages/SortingHatPage"; 
+import SortingHatPage from "./pages/SortingHatPage";
 
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
@@ -11,17 +16,17 @@ import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import "./Styles/App.css"
+import "./Styles/App.css";
 import "./Styles/Nav.css";
 
 const Layout = () => {
-  const { darkMode } = useTheme(); 
+  const { darkMode } = useTheme();
   const [entries, setEntries] = useState(
     JSON.parse(localStorage.getItem("entries")) || []
   );
 
   return (
-    <div className={darkMode ? "dark" : ""}> 
+    <div className={darkMode ? "dark" : ""}>
       <NavBar setEntries={setEntries} />
       <Outlet context={{ entries, setEntries }} />
     </div>
@@ -29,7 +34,9 @@ const Layout = () => {
 };
 
 function App() {
-  const [entries, setEntries] = useState([]);
+  const [entries, setEntries] = useState(
+    JSON.parse(localStorage.getItem("entries")) || []
+  );
 
   const router = createBrowserRouter([
     {
@@ -45,7 +52,7 @@ function App() {
       element: <SignUp />,
     },
     {
-      element: <Layout />, 
+      element: <Layout />,
       children: [
         {
           path: "/home",
@@ -57,10 +64,14 @@ function App() {
         },
         {
           path: "/post/create",
-          element: <CreatePost setEntries={setEntries} />,
+          element: <CreatePost setEntries={setEntries} entries={entries} />,
         },
         {
-          path: "/sorting-hat", 
+          path: "/post/edit/:id",
+          element: <CreatePost setEntries={setEntries} entries={entries} />,
+        },
+        {
+          path: "/sorting-hat",
           element: <ProtectedRoute element={<SortingHatPage />} />,
         },
       ],
@@ -68,7 +79,7 @@ function App() {
   ]);
 
   return (
-    <ThemeProvider> 
+    <ThemeProvider>
       <RouterProvider router={router} />
     </ThemeProvider>
   );

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import loginImg from "../assets/login.webp";
+import { useTheme } from "../Context/ThemeContext"; 
+
+import moon from "../assets/moon.png";
+import sun from "../assets/sun.png";
 import "../Styles/LogIn.css";
 
 const Login = () => {
@@ -8,9 +12,17 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLogin, setIsLogin] = useState(true);
+  const { darkMode, setDarkMode } = useTheme();
 
   const navigate = useNavigate();
 
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem("darkMode", newMode); 
+      return newMode;
+    });
+  };
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     if (username === "" && password === "") {
@@ -34,19 +46,50 @@ const Login = () => {
   };
 
   useEffect(() => {
-    document.getElementById("root").style.backgroundColor = "#000000";
-    document.body.style.backgroundColor = "#000000";
-    document.documentElement.style.backgroundColor = "#000000";
+    if (darkMode) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
 
     return () => {
-      document.getElementById("root").style.backgroundColor = "";
-      document.body.style.backgroundColor = "";
-      document.documentElement.style.backgroundColor = "";
+      document.body.classList.remove("dark-mode");
     };
-  }, []);
+  }, [darkMode]);
+
+
 
   return (
     <>
+    <button
+        onClick={toggleDarkMode}
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          padding: "6px",
+          borderRadius: "50%", 
+          border: "none",
+          background: darkMode ? "#222" : "#ddd", 
+          color: darkMode ? "#fff" : "#333",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "40px", 
+          height: "40px", 
+        }}
+      >
+        <img
+          src={darkMode ? moon : sun}
+          alt="Theme Icon"
+          className="theme-icon"
+          style={{
+            width: "20px", 
+            height: "20px", 
+          }}
+        />
+      </button>
       <div className="min-h-screen flex items-center justify-center ">
         <div
           className="container bg-cover bg-center bg-no-repeat"

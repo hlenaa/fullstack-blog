@@ -3,25 +3,30 @@
 .sorting-hat-quiz {
     text-align: center;
     background-color: #2c2c2c02;
-    color: #f5f5f5;
-    border-radius: 10px;
-    width: 50%;
+    color: cyan;    border-radius: 10px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     font-size: 20px;
-    margin-top: 90px;
+    margin-top: 150px;
     margin-bottom: 50px;
 }
 
-
+.hat {
+  width: 500px;
+  height: auto; 
+  object-fit: contain;
+  
+}
   
   .hat-h2 {
     margin-top: 100px;
     font-size: 24px;
     padding-bottom: 20px;
+
   }
   
   .hat-h3 {
@@ -31,7 +36,7 @@
   
   .hat-btn {
     width: 500px;
-    background-color: #00ffb3;
+    background-color: cyan;
     color: #222;
     padding: 10px 15px;
     margin: 5px;
@@ -41,6 +46,7 @@
     border-radius: 5px;
     transition: background 0.3s ease;
     margin-top: 30px;
+    font-weight: bold;
     
   }
   

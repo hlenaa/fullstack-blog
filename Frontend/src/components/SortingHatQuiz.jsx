@@ -66,7 +66,11 @@ const SortingHatQuiz = () => {
 
   return (
     <div className="sorting-hat-quiz">
-      <img className="hat" src="Sorting-hat.webp" alt="" />
+<img 
+  className="hat" 
+  src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExemo4ajE4Yjd3NmVsd3NibG1qeXkwOXA5dW1uYWZjZWJ0dGR2ZDM2OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PPw87BtlPrQIg/giphy.gif" 
+  alt="Sorting Hat GIF" 
+/>
       <h2 className="hat-h2"> Which House is Yours?</h2>
       {house ? (
         <div>

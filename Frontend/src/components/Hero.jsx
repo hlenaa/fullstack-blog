@@ -10,7 +10,7 @@ const Hero = () => {
         <div className="hero-text">
           <h2 className="welcome">Welcome, witches, wizards, and Muggles alike! </h2>
          
-          <h2>Join fellow fans as we celebrate the magic of Harry Potter.</h2>
+         
         
         </div>
       </div>

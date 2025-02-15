@@ -82,10 +82,11 @@
 
 .form h2 {
   color: white;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: 700;
   margin-bottom: 30px;
   text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
 }
 
 .input-group {

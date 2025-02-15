@@ -1,14 +1,11 @@
 import {
   createBrowserRouter,
   RouterProvider,
-  Navigate,
   Outlet,
 } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./Context/ThemeContext";
-import { useState, useEffect } from "react";
-import React from "react";
+import React, { useState } from "react";
 import SortingHatPage from "./pages/SortingHatPage";
-
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
@@ -16,6 +13,12 @@ import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import LandingPage from "./pages/LandingPage";
+import Characters from "./subLinks/Characters";
+import Students from "./subLinks/Students";
+import Staff from "./subLinks/Staff";
+import Houses from "./subLinks/Houses";
+import Spells from "./subLinks/Spells";
 import "./Styles/App.css";
 import "./Styles/Nav.css";
 
@@ -27,21 +30,17 @@ const Layout = () => {
 
   return (
     <div className={darkMode ? "dark" : ""}>
-      <NavBar setEntries={setEntries} />
+      <NavBar />
       <Outlet context={{ entries, setEntries }} />
     </div>
   );
 };
 
 function App() {
-  const [entries, setEntries] = useState(
-    JSON.parse(localStorage.getItem("entries")) || []
-  );
-
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Navigate to="/login" />,
+      element: <LandingPage />, 
     },
     {
       path: "/login",
@@ -60,19 +59,36 @@ function App() {
         },
         {
           path: "/post/:id",
-          element: <PostDetails />,
+          element: <ProtectedRoute element={<PostDetails />} />,
         },
         {
           path: "/post/create",
-          element: <CreatePost setEntries={setEntries} entries={entries} />,
-        },
-        {
-          path: "/post/edit/:id",
-          element: <CreatePost setEntries={setEntries} entries={entries} />,
+          element: <ProtectedRoute element={<CreatePost />} />,
         },
         {
           path: "/sorting-hat",
           element: <ProtectedRoute element={<SortingHatPage />} />,
+        },
+       
+        {
+          path: "/characters",
+          element: <ProtectedRoute element={<Characters />} />,
+        },
+        {
+          path: "/students",
+          element: <ProtectedRoute element={<Students />} />,
+        },
+        {
+          path: "/staff",
+          element: <ProtectedRoute element={<Staff />} />,
+        },
+        {
+          path: "/houses",
+          element: <ProtectedRoute element={<Houses />} />,
+        },
+        {
+          path: "/spells",
+          element: <ProtectedRoute element={<Spells />} />,
         },
       ],
     },

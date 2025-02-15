@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./Context/ThemeContext";
 import React, { useState } from "react";
 import SortingHatPage from "./pages/SortingHatPage";
@@ -40,7 +36,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LandingPage />, 
+      element: <LandingPage />,
     },
     {
       path: "/login",
@@ -58,18 +54,21 @@ function App() {
           element: <ProtectedRoute element={<Home />} />,
         },
         {
-          path: "/post/:id",
-          element: <ProtectedRoute element={<PostDetails />} />,
-        },
-        {
           path: "/post/create",
           element: <ProtectedRoute element={<CreatePost />} />,
+        },
+        {
+          path: "/post/edit/:id",
+          element: <ProtectedRoute element={<CreatePost />} />,
+        },
+        {
+          path: "/post/:id",
+          element: <ProtectedRoute element={<PostDetails />} />,
         },
         {
           path: "/sorting-hat",
           element: <ProtectedRoute element={<SortingHatPage />} />,
         },
-       
         {
           path: "/characters",
           element: <ProtectedRoute element={<Characters />} />,

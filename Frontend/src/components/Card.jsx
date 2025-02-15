@@ -1,7 +1,14 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import "../Styles/CreateP.css";
 
 const Card = ({ entry }) => {
+  const houseImages = {
+    ravenclaw: "url('/rav.png')", 
+    gryffindor: "url('/gry.png')", 
+    hufflepuff: "url('/huf.png')", 
+    slytherin: "url('/sly.png')",
+  };
+
   const getHouseClass = () => {
     return entry.house ? `${entry.house}-card` : "";
   };
@@ -12,6 +19,9 @@ const Card = ({ entry }) => {
       style={{
         borderRadius: '12px',
         overflow: 'hidden',
+        backgroundImage: entry.house ? houseImages[entry.house] : "none",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
       <div className="relative">
@@ -22,7 +32,7 @@ const Card = ({ entry }) => {
             className="w-full h-48 object-cover"
             style={{
               opacity: 0.7,
-              borderRadius: '12px 12px 0 0', 
+              borderRadius: '12px 12px 0 0',
             }}
           />
         </div>

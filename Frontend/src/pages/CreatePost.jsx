@@ -21,6 +21,8 @@ const CreatePost = ({ entries, setEntries }) => {
   const [isUpdating, setIsUpdating] = useState(!!id);
   const [postDeleted, setPostDeleted] = useState(false);
 
+
+
   useEffect(() => {
     const fetchPost = async () => {
       if (!id) return;
@@ -47,8 +49,22 @@ const CreatePost = ({ entries, setEntries }) => {
     }));
   };
 
+  const isValidImageURL = (url) => {
+    const regex = /^https?:\/\/[^\s$.?#].[^\s]*$/gm;
+    return regex.test(url);
+  };
+
+  const isBase64Image = (image) => {
+    return image && image.startsWith("data:image");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (postData.image && !isValidImageURL(postData.image) && !isBase64Image(postData.image)) {
+      console.error("Invalid image URL or base64 data.");
+      return;
+    }
 
     if (!postData.date) {
       postData.date = new Date().toISOString();
@@ -74,14 +90,16 @@ const CreatePost = ({ entries, setEntries }) => {
           `http://localhost:5050/posts/${id}`,
           postData
         );
-        setEntries((prevEntries) =>
-          prevEntries.map((entry) => (entry.id === id ? response.data : entry))
-        );
-        setIsUpdating(true);
+        if (setEntries && Array.isArray(entries)) {
+          setEntries((prevEntries) =>
+            prevEntries.map((entry) => (entry.id === id ? response.data : entry))
+          );
+        }
       } else {
         response = await axios.post("http://localhost:5050/posts", postData);
-        setEntries([response.data, ...entries]);
-        setPostId(response.data.id);
+        if (setEntries && Array.isArray(entries)) {
+          setEntries((prevEntries) => [response.data, ...(prevEntries || [])]);
+        }
       }
 
       setPostId(response.data.id);
@@ -106,7 +124,10 @@ const CreatePost = ({ entries, setEntries }) => {
   };
 
   return (
-    <div className={`create-post-container`}>
+    <div
+      className="create-post-container"
+      
+    >
       {!formSubmitted ? (
         <>
           <h3>{isUpdating ? "Update Post" : "Create Post"}</h3>
@@ -171,6 +192,15 @@ const CreatePost = ({ entries, setEntries }) => {
                 placeholder="Image URL"
                 className="input"
               />
+              {postData.image && (
+                <div className="image-preview">
+                  <img
+                    src={isBase64Image(postData.image) ? postData.image : `http://localhost:5050/images/${postData.image}`}
+                    alt="Preview"
+                    style={{ maxWidth: "100%", maxHeight: "300px", objectFit: "contain" }}
+                  />
+                </div>
+              )}
             </div>
             <div className="create-post-submit">
               <Link to="/home" className="btn bg-gray-300 text-black">
